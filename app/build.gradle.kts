@@ -5,13 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "ni.edu.uam.prototipointerfazusuario"
+    namespace = "ni.edu.uam.prototipousuariointerfaz"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "ni.edu.uam.prototipointerfazusuario"
+        applicationId = "ni.edu.uam.prototipousuariointerfaz"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

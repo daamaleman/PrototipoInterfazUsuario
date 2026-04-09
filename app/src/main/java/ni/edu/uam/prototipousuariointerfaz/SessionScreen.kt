@@ -1,11 +1,12 @@
-package ni.edu.uam.prototipointerfazusuario
+package ni.edu.uam.prototipousuariointerfaz
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -15,8 +16,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ni.edu.uam.prototipointerfazusuario.ui.theme.PsycheBlue
-import ni.edu.uam.prototipointerfazusuario.ui.theme.PsycheInputGrey
+
+private val PsycheBlue = Color(0xFF2C4C9B)
+private val PsycheInputGrey = Color(0xFFF2F2F2)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,7 +31,7 @@ fun SessionScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { 
+                title = {
                     Column {
                         Text("PsycheAI", fontSize = 12.sp, color = Color.White.copy(alpha = 0.8f))
                         Text("Sesión de Análisis", fontWeight = FontWeight.Bold, color = Color.White, fontSize = 20.sp)
@@ -37,7 +39,7 @@ fun SessionScreen() {
                 },
                 navigationIcon = {
                     IconButton(onClick = { /* Simular navegación */ }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Volver", tint = Color.White)
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Volver", tint = Color.White)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -110,7 +112,7 @@ fun SessionScreen() {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     // Botón circular flotante simulado como en la imagen
                     Surface(
-                        shape = androidx.compose.foundation.shape.CircleShape,
+                        shape = CircleShape,
                         color = Color(0xFFF0F0F0),
                         modifier = Modifier.size(56.dp)
                     ) {
@@ -118,7 +120,7 @@ fun SessionScreen() {
                             Icon(Icons.Default.Menu, contentDescription = null, tint = Color.Black)
                         }
                     }
-                    
+
                     Spacer(modifier = Modifier.width(16.dp))
 
                     // Botón de Analizar
@@ -192,14 +194,14 @@ fun ResultCard(classification: String, message: String, color: Color) {
                 color = Color.Black
             )
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             Row {
                 Text(text = "Estado: ", fontWeight = FontWeight.Bold, color = Color.Black)
                 Text(text = classification, fontWeight = FontWeight.Bold, color = color)
             }
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             Text(
                 text = message,
                 style = MaterialTheme.typography.bodyMedium,
