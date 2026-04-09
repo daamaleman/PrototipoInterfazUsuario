@@ -42,7 +42,7 @@ fun LoginScreen() {
         modifier = Modifier.fillMaxSize()
     ) {
 
-        // 🔵 HEADER CON GRADIENTE
+        // HEADER CON GRADIENTE
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -79,7 +79,7 @@ fun LoginScreen() {
             }
         }
 
-        // ⚪ CONTENIDO
+        // CONTENIDO
         Column(
             modifier = Modifier
                 .fillMaxSize()
