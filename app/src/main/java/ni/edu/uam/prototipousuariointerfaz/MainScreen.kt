@@ -19,7 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 
 @Composable
-fun MainScreen() {
+fun MainScreen(onLogout: () -> Unit = {}) {
     var selectedScreen by remember { mutableIntStateOf(0) }
 
     Scaffold(
@@ -37,6 +37,12 @@ fun MainScreen() {
                     onClick = { selectedScreen = 1 },
                     icon = { Icon(Icons.Default.Menu, contentDescription = "Dashboard") },
                     label = { Text("Dashboard") }
+                )
+                NavigationBarItem(
+                    selected = false,
+                    onClick = onLogout,
+                    icon = { Icon(Icons.Default.Menu, contentDescription = "Salir") },
+                    label = { Text("Salir") }
                 )
             }
         }
