@@ -1,11 +1,11 @@
-package ni.edu.uam.prototipousuariointerfaz.ui.profile
+package ni.edu.uam.prototipousuariointerfaz
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,24 +33,15 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-
         EmotionalHeader(name, stress, stressColor)
-
         PsychologicalAnalysis(stress, thoughts, progress)
-
         PatternSection()
-
         RecommendationCard(stress)
-
         ReprogramButton()
-
         SessionList()
-
         SettingsSection()
     }
 }
-
-// ---------------- HEADER EMOCIONAL ----------------
 
 @Composable
 fun EmotionalHeader(name: String, stress: Int, color: Color) {
@@ -74,7 +65,6 @@ fun EmotionalHeader(name: String, stress: Int, color: Color) {
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Box(
             modifier = Modifier
                 .size(80.dp)
@@ -84,15 +74,24 @@ fun EmotionalHeader(name: String, stress: Int, color: Color) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text(name, color = Color.White, style = MaterialTheme.typography.titleLarge)
+        Text(
+            text = name,
+            color = Color.White,
+            style = MaterialTheme.typography.titleLarge
+        )
 
-        Text("Estado emocional: $stateText", color = Color.White)
+        Text(
+            text = "Estado emocional: $stateText",
+            color = Color.White
+        )
 
-        Text(message, color = Color.White, style = MaterialTheme.typography.bodySmall)
+        Text(
+            text = message,
+            color = Color.White,
+            style = MaterialTheme.typography.bodySmall
+        )
     }
 }
-
-// ---------------- ANÁLISIS PSICOLÓGICO ----------------
 
 @Composable
 fun PsychologicalAnalysis(stress: Int, thoughts: Int, progress: Int) {
@@ -109,15 +108,17 @@ fun PsychologicalAnalysis(stress: Int, thoughts: Int, progress: Int) {
             .padding(16.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
-
         Column(modifier = Modifier.padding(16.dp)) {
 
-            Text("Análisis psicológico", style = MaterialTheme.typography.titleMedium)
+            Text(
+                text = "Análisis psicológico",
+                style = MaterialTheme.typography.titleMedium
+            )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Text("Nivel de estrés: $stress%")
-            LinearProgressIndicator(progress = stress / 100f)
+            LinearProgressIndicator(progress = { stress / 100f })
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -134,8 +135,6 @@ fun PsychologicalAnalysis(stress: Int, thoughts: Int, progress: Int) {
     }
 }
 
-// ---------------- PATRONES DETECTADOS ----------------
-
 @Composable
 fun PatternSection() {
     Card(
@@ -144,8 +143,10 @@ fun PatternSection() {
             .padding(16.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-
-            Text("Patrones detectados", style = MaterialTheme.typography.titleMedium)
+            Text(
+                text = "Patrones detectados",
+                style = MaterialTheme.typography.titleMedium
+            )
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -154,8 +155,6 @@ fun PatternSection() {
         }
     }
 }
-
-// ---------------- RECOMENDACIONES ----------------
 
 @Composable
 fun RecommendationCard(stress: Int) {
@@ -171,16 +170,17 @@ fun RecommendationCard(stress: Int) {
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        Text(message, modifier = Modifier.padding(16.dp))
+        Text(
+            text = message,
+            modifier = Modifier.padding(16.dp)
+        )
     }
 }
-
-// ---------------- BOTÓN PRINCIPAL ----------------
 
 @Composable
 fun ReprogramButton() {
     Button(
-        onClick = { /* navegación después */ },
+        onClick = { },
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
@@ -188,8 +188,6 @@ fun ReprogramButton() {
         Text("Iniciar reprogramación cognitiva")
     }
 }
-
-// ---------------- HISTORIAL ----------------
 
 @Composable
 fun SessionList() {
@@ -214,13 +212,14 @@ fun SessionItem(date: String, type: String, state: String) {
     }
 }
 
-// ---------------- CONFIGURACIÓN ----------------
-
 @Composable
 fun SettingsSection() {
     Column(modifier = Modifier.padding(16.dp)) {
 
-        Text("Configuración", style = MaterialTheme.typography.titleMedium)
+        Text(
+            text = "Configuración",
+            style = MaterialTheme.typography.titleMedium
+        )
 
         Spacer(modifier = Modifier.height(8.dp))
 
