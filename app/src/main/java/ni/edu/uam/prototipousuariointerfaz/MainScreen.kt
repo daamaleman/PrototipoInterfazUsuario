@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -19,7 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 
 @Composable
-fun MainScreen(onLogout: () -> Unit = {}) {
+fun MainScreen(onLogout: () -> Unit) {
     var selectedScreen by remember { mutableIntStateOf(0) }
 
     Scaffold(
@@ -39,6 +40,12 @@ fun MainScreen(onLogout: () -> Unit = {}) {
                     label = { Text("Dashboard") }
                 )
                 NavigationBarItem(
+                    selected = selectedScreen == 2,
+                    onClick = { selectedScreen = 2 },
+                    icon = { Icon(Icons.Default.Person, contentDescription = "Perfil") },
+                    label = { Text("Perfil") }
+                )
+                NavigationBarItem(
                     selected = false,
                     onClick = onLogout,
                     icon = { Icon(Icons.Default.Menu, contentDescription = "Salir") },
@@ -53,8 +60,9 @@ fun MainScreen(onLogout: () -> Unit = {}) {
                 .padding(innerPadding)
         ) {
             when (selectedScreen) {
-                0 -> SessionScreen()
-                else -> ResultadosDashboardScreen()
+                0 -> SessionScreen(onBackToDashboard = { selectedScreen = 1 })
+                1 -> ResultadosDashboardScreen(onGoToSession = { selectedScreen = 0 })
+                else -> ProfileScreen(onLogout = onLogout)
             }
         }
     }

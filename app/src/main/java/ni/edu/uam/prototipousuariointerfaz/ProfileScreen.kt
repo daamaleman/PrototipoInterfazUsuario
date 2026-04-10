@@ -1,4 +1,4 @@
-package ni.edu.uam.prototipousuariointerfaz.ui.profile
+package ni.edu.uam.prototipousuariointerfaz
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,7 +15,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier) {
+fun ProfileScreen(
+    modifier: Modifier = Modifier,
+    onLogout: () -> Unit = {}
+) {
 
     val name = "David"
     val stress = 65
@@ -46,7 +49,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
 
         SessionList()
 
-        SettingsSection()
+        SettingsSection(onLogout = onLogout)
     }
 }
 
@@ -117,7 +120,7 @@ fun PsychologicalAnalysis(stress: Int, thoughts: Int, progress: Int) {
             Spacer(modifier = Modifier.height(8.dp))
 
             Text("Nivel de estrés: $stress%")
-            LinearProgressIndicator(progress = stress / 100f)
+            LinearProgressIndicator(progress = { stress / 100f })
 
             Spacer(modifier = Modifier.height(8.dp))
 
@@ -217,7 +220,7 @@ fun SessionItem(date: String, type: String, state: String) {
 // ---------------- CONFIGURACIÓN ----------------
 
 @Composable
-fun SettingsSection() {
+fun SettingsSection(onLogout: () -> Unit) {
     Column(modifier = Modifier.padding(16.dp)) {
 
         Text("Configuración", style = MaterialTheme.typography.titleMedium)
@@ -230,6 +233,9 @@ fun SettingsSection() {
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Text("Cerrar sesión", color = Color.Red)
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(onClick = onLogout, modifier = Modifier.fillMaxWidth()) {
+            Text("Cerrar sesion")
+        }
     }
 }

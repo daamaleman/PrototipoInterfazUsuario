@@ -12,7 +12,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,7 +31,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun LoginScreen(onLoginSuccess: () -> Unit) {
+fun LoginScreen(
+    onLoginSuccess: () -> Unit,
+    onGoToRegister: () -> Unit
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var mensaje by remember { mutableStateOf("") }
@@ -98,11 +103,11 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
 
             Button(
                 onClick = {
-                    if (email == "admin@psycheai.com" && password == "1234") {
+                    if ((email == "admin@psycheai.com" && password == "1234") || (email.isNotBlank() && password.length >= 4)) {
                         mensaje = "Inicio de sesion exitoso"
                         onLoginSuccess()
                     } else {
-                        mensaje = "Datos incorrectos"
+                        mensaje = "Datos incorrectos (usa admin@psycheai.com / 1234)"
                     }
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5F6BEA)),
@@ -114,11 +119,25 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
                 Text("Iniciar sesion")
             }
 
+            Spacer(modifier = Modifier.height(12.dp))
+
+            OutlinedButton(
+                onClick = onLoginSuccess,
+                shape = RoundedCornerShape(30.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(55.dp)
+            ) {
+                Text("Entrar como invitado")
+            }
+
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = mensaje)
 
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "No tienes cuenta? Registrate", color = Color.Gray)
+            TextButton(onClick = onGoToRegister, modifier = Modifier.fillMaxWidth()) {
+                Text(text = "No tienes cuenta? Registrate", color = Color.Gray)
+            }
         }
     }
 }

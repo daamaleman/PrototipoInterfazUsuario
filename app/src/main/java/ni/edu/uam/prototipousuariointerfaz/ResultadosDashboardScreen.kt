@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 
 // 1. ESTRUCTURA PRINCIPAL DE LA PANTALLA (Adopta el diseño de cabecera de la imagen)
 @Composable
-fun ResultadosDashboardScreen() {
+fun ResultadosDashboardScreen(onGoToSession: () -> Unit = {}) {
     // ESTADO: Parámetro interactivo para simulación de recomendaciones
     var estresPercibido by remember { mutableFloatStateOf(75f) } // Initial estimated value
 
@@ -124,7 +124,7 @@ fun ResultadosDashboardScreen() {
 
             // BOTÓN DE ACCIÓN (Para continuar el flujo)
             Button(
-                onClick = { /* Iniciar nueva sesión o exploración */ },
+                onClick = onGoToSession,
                 modifier = Modifier.fillMaxWidth().height(56.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {

@@ -23,13 +23,27 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+private enum class AppScreen {
+    Login,
+    Register,
+    Main
+}
+
 @Composable
 fun AppEntryPoint() {
-    var isLoggedIn by remember { mutableStateOf(false) }
+    var currentScreen by remember { mutableStateOf(AppScreen.Login) }
 
-    if (isLoggedIn) {
-        MainScreen(onLogout = { isLoggedIn = false })
-    } else {
-        LoginScreen(onLoginSuccess = { isLoggedIn = true })
+    when (currentScreen) {
+        AppScreen.Login -> LoginScreen(
+            onLoginSuccess = { currentScreen = AppScreen.Main },
+            onGoToRegister = { currentScreen = AppScreen.Register }
+        )
+
+        AppScreen.Register -> RegisterScreen(
+            onRegisterSuccess = { currentScreen = AppScreen.Main },
+            onBackToLogin = { currentScreen = AppScreen.Login }
+        )
+
+        AppScreen.Main -> MainScreen(onLogout = { currentScreen = AppScreen.Login })
     }
 }

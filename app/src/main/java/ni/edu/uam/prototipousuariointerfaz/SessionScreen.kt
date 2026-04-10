@@ -22,7 +22,7 @@ private val PsycheInputGrey = Color(0xFFF2F2F2)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SessionScreen() {
+fun SessionScreen(onBackToDashboard: () -> Unit = {}) {
     var userText by remember { mutableStateOf("") }
     var classification by remember { mutableStateOf<String?>(null) }
     var responseMessage by remember { mutableStateOf("") }
@@ -38,7 +38,7 @@ fun SessionScreen() {
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = { /* Simular navegación */ }) {
+                    IconButton(onClick = onBackToDashboard) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Volver", tint = Color.White)
                     }
                 },
